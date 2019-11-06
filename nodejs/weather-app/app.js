@@ -7,5 +7,5 @@ request({ url: url, json: true }, (error, response) => {
     const currentTemp = response.body.currently.temperature
     const currentPrecipProb = response.body.currently.precipProbability
 
-    return console.log(`It is currently ${currentTemp} degrees out. There is a ${currentPrecipProb} chance of rain.`)
+    return console.log(`It is currently ${currentTemp} degrees out. There is a ${currentPrecipProb}% chance of rain.`)
 })
