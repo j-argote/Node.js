@@ -45,35 +45,35 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
-    const city = req.query.city
-
-    if (!city) {
+    if (!req.query.address) {
         return res.send({
             error: 'Address is required'
         })
-    } else {
-        geocode(city, (error, {latitude, longitude, location}) => {
-            if (error) {
-                return res.send({
-                    error: 'Unable to connect to location services!'
-                })
-            }
-            console.log(error)
-            console.log(latitude, longitude, location)
-            
-        // forecast(latitude, longitude, (error, forecastData) => {
-        //     if (error) {
-        //         return res.send({
-        //             error: 'Invalid location entered!'
-        //         })
-        //     }
-        //     res.send({
-        //         forecast: forecastData,
-        //         location
-        //     })
-        // })
-        })
     }
+
+    geocode(req.query.address, (error, {latitude, longitude, location} = {}) => {
+        if (error) {
+            return res.send({ error })
+        }
+
+    forecast(latitude, longitude, (error, forecastData) => {
+        if (error) {
+            return res.send({ error })
+        }
+
+        res.send({
+            forecast: forecastData,
+            location,
+            address: req.query.address
+        })
+    })
+    })
+
+    // res.send({
+    //     forecast: 'It is snowing',
+    //     location: 'Philadelphia',
+    //     address: req.query.address
+    // })
 })
 
 app.get('/products', (req, res) => {
