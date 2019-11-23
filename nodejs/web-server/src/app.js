@@ -3,6 +3,9 @@ const path = require('path');
 // npm modules
 const express = require('express');
 const hbs = require('hbs');
+// Files
+const geocode = require('./utils/geocode');
+const forecast = require('./utils/forecast');
 
 const app = express()
 
@@ -42,9 +45,47 @@ app.get('/help', (req, res) => {
 })
 
 app.get('/weather', (req, res) => {
+    const city = req.query.city
+
+    if (!city) {
+        return res.send({
+            error: 'Address is required'
+        })
+    } else {
+        geocode(city, (error, {latitude, longitude, location}) => {
+            if (error) {
+                return res.send({
+                    error: 'Unable to connect to location services!'
+                })
+            }
+            console.log(error)
+            console.log(latitude, longitude, location)
+            
+        // forecast(latitude, longitude, (error, forecastData) => {
+        //     if (error) {
+        //         return res.send({
+        //             error: 'Invalid location entered!'
+        //         })
+        //     }
+        //     res.send({
+        //         forecast: forecastData,
+        //         location
+        //     })
+        // })
+        })
+    }
+})
+
+app.get('/products', (req, res) => {
+    if (!req.query.search) {
+        return res.send({
+            error: 'You must provide a search term'
+        })
+    }
+
+    console.log(req.query.search)
     res.send({
-        forcast: 'It is 50 degrees.',
-        location: 'Houston '
+        products: []
     })
 })
 
