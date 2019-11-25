@@ -1,14 +1,21 @@
 console.log('Client side javascript file is loaded')
 
-const url = 'http://localhost:3000/weather?address=boston'
+const weatherForm = document.querySelector('form')
+const search = document.querySelector('input')
 
-fetch(url).then((response) => {
-    response.json().then(({error, location, forecast}) => {
-        if (error) {
-            return console.log(error)
-        }
+weatherForm.addEventListener('submit', (e) => {
+    e.preventDefault()
 
-        console.log(location)
-        console.log(forecast)
+    const location = search.value
+    const url = `http://localhost:3000/weather?address=${location}`
+
+    fetch(url).then((response) => {
+        response.json().then(({ error, location, forecast }) => {
+            if (error) {
+                return console.log(error)
+            }
+            console.log(location)
+            console.log(forecast)
+        })
     })
 })
