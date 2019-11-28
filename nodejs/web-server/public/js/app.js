@@ -5,7 +5,8 @@ const messageTwo = document.querySelector('#message-2')
 
 weatherForm.addEventListener('submit', (e) => {
     e.preventDefault()
-
+    
+    // fetches data from api's
     const location = search.value
     const url = `http://localhost:3000/weather?address=${location}`
 
