@@ -6,7 +6,7 @@ const doWorkPromise = new Promise((resolve, reject) => {
     }, 2000)
 })
 
-// promise practice
+// promise practice using .then() and .catch()
 doWorkPromise.then((result) => {
     console.log('Success!', result)
 }).catch((error) => {
