@@ -23,6 +23,7 @@ hbs.registerPartials(partialsPath)
 // Setup static directory to serve
 app.use(express.static(publicDirectoryPath))
 
+// Route for index pade
 app.get('', (req, res) => {
     res.render('index', {
         title: 'Weather',
@@ -30,6 +31,7 @@ app.get('', (req, res) => {
     })
 })
 
+// Route for about page
 app.get('/about', (req, res) => {
     res.render('about', {
         title: 'About Me',
