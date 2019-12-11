@@ -39,6 +39,7 @@ app.get('/about', (req, res) => {
     })
 })
 
+// Route for help page
 app.get('/help', (req, res) => {
     res.render('help', {
         message: 'This is the help page!',
@@ -47,6 +48,7 @@ app.get('/help', (req, res) => {
     })
 })
 
+// Route for weather page
 app.get('/weather', (req, res) => {
     if (!req.query.address) {
         return res.send({
