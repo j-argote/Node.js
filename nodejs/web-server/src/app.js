@@ -56,11 +56,13 @@ app.get('/weather', (req, res) => {
         })
     }
 
+    // Gets information from mapbox api
     geocode(req.query.address, (error, {latitude, longitude, location} = {}) => {
         if (error) {
             return res.send({ error })
         }
 
+    // Uses information uptained from mapbox api to get weather data from darksky api
     forecast(latitude, longitude, (error, forecastData) => {
         if (error) {
             return res.send({ error })
